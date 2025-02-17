@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MalltoMapDemo</string>
+
+
+    <string name="start_iBeacon_scanning">start iBeacon scanning</string>
+    <string name="stop_iBeacon_scanning">stop iBeacon scanning</string>
+
+    <string name="start_AoA">start AoA</string>
+    <string name="stop_AoA">stop AoA</string>
+</resources>
