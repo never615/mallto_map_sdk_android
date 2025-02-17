@@ -2,7 +2,7 @@
 
 ## demo 下载
 
-[https://github.com/never615/mallto_map_sdk_android/raw/refs/heads/master/demo/apk/demo-debug.apk](https://github.com/never615/mallto_map_sdk_android/raw/refs/heads/master/demo/apk/demo-debug.apk)
+[https://github.com/never615/mallto_map_sdk_android/raw/refs/heads/master/app/apk/demo-debug.apk](https://github.com/never615/mallto_map_sdk_android/raw/refs/heads/master/app/apk/demo-debug.apk)
 
 ## How to use
 
