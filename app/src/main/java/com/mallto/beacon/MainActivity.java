@@ -44,7 +44,7 @@ import java.util.Set;
 public class MainActivity extends AppCompatActivity {
     public static final boolean DEBUG = true;
 
-    public static final String SERVER_DOMAIN = "https://test-easy.mall-to.com";
+    public static final String SERVER_DOMAIN = "https://integration-easy.mall-to.com";
 
 
     public static final String MAP_DOMAIN = "https://h5-integration.mall-to.com/integration";
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     private String domain = SERVER_DOMAIN;
     private String mapDomain = SERVER_DOMAIN;
-    private String uuid = "1000242";
+    private String uuid = "1000241";
     private String username;
 
     private final Adapter adapter = new Adapter();
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        uuid = getSharedPreferences("app", 0).getString("uuid", "1000242");
+        uuid = getSharedPreferences("app", 0).getString("uuid", "1000241");
         binding.etUUID.setText(uuid);
 
         username = getSharedPreferences("app", 0).getString("username", "001");
