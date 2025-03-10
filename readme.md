@@ -26,7 +26,18 @@ uuidList.add("FDA50693-A4E2-4FB1-AFCF-C6EB07647827");
 MalltoMap.init(new MalltoConfig.Builder(SERVER_DOMAIN, PROJECT_UUID)
         .setDebug(DEBUG) //是否打印日志
         .setDeviceUUIDList(uuidList) // 扫描的iBeacon 设备uuid
-        .setUserId("001") // 用户标识
+        .setUserSlug("001") // 可选关联第三方系统的用户唯一标识,如email/mobile/user_id 等
+        .setFetchDeviceSlugCallback(new FetchSlugCallback() { // init会获取设备短标识，异步回调到主线程
+            @Override
+            public void onSuccess(String slug) {
+                Toast.makeText(MainActivity.this, "slug" + slug, Toast.LENGTH_SHORT).show();
+            }
+        
+            @Override
+            public void onFail(String reason) {
+        
+            }
+        })
         .setNotification(notification) // 扫描iBeacon需要开启服务，需要传入Notification
         .setMapDomain(MAP_DOMAIN) // 设置地图域名
         .setScanInterval(1100L)  // 设置扫描频率，1100ms一次

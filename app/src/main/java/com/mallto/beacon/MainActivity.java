@@ -35,6 +35,7 @@ import com.mallto.beacon.databinding.ActivityMainBinding;
 import com.mallto.map.sdk.MalltoConfig;
 import com.mallto.map.sdk.MalltoMap;
 import com.mallto.map.sdk.bean.MalltoBeacon;
+import com.mallto.map.sdk.callback.FetchSlugCallback;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -233,7 +234,18 @@ public class MainActivity extends AppCompatActivity {
         MalltoMap.init(new MalltoConfig.Builder(domain, projectUUID)
                 .setDebug(DEBUG)
                 .setMapDomain(MAP_DOMAIN)
-                .setUserId(userName)
+                .setUserSlug(userName) // 可选关联第三方系统的用户唯一标识,如email/mobile/user_id 等
+                .setFetchDeviceSlugCallback(new FetchSlugCallback() { // init会获取设备标识，异步回调到主线程
+                    @Override
+                    public void onSuccess(String s) {
+                        Toast.makeText(MainActivity.this, "slug:"+ s, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFail(String s) {
+
+                    }
+                })
                 .setScanInterval(scanInterval)
                 .setDeviceUUIDList(uuidList)
                 .setNotification(notification)
