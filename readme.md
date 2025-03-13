@@ -23,7 +23,7 @@ List<String> uuidList = new ArrayList<>();
 // 支持的beacon uuid
 uuidList.add("FDA50693-A4E2-4FB1-AFCF-C6EB07647827");
 
-MalltoMap.init(new MalltoConfig.Builder(SERVER_DOMAIN, PROJECT_UUID)
+MalltoMap.init(new MalltoConfig.Builder(appId, appSecret, SERVER_DOMAIN, PROJECT_UUID)
         .setDebug(DEBUG) //是否打印日志
         .setDeviceUUIDList(uuidList) // 扫描的iBeacon 设备uuid
         .setUserSlug("001") // 可选关联第三方系统的用户唯一标识,如email/mobile/user_id 等
