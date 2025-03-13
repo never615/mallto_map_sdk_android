@@ -137,6 +137,7 @@
 
         </LinearLayout>
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -148,14 +149,59 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:text="用户名"
+                android:text="appId"
+                android:textColor="@android:color/darker_gray" />
+
+            <EditText
+                android:id="@+id/etAppId"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="请输入appid" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/border_item"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="appSecret"
+                android:textColor="@android:color/darker_gray" />
+
+            <EditText
+                android:id="@+id/etSecret"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="请输入appSecret" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/border_item"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="用户标识（可选关联第三方系统的用户唯一标识,如email/mobile/user_id 等）"
                 android:textColor="@android:color/darker_gray" />
 
             <EditText
                 android:id="@+id/etUserName"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:hint="输入用户名"
+                android:hint="输入用户标识"
                 android:text="001" />
 
         </LinearLayout>

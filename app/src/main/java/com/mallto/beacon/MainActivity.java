@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
     private View domainBtn;
     private Button scanBtn;
     private Button aoaBtn;
+    private String appId;
+    private String secret;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +108,12 @@ public class MainActivity extends AppCompatActivity {
 
         username = getSharedPreferences("app", 0).getString("username", "001");
         binding.etUserName.setText(username);
+
+        appId = getSharedPreferences("app", 0).getString("appId", "999");
+        binding.etAppId.setText(appId);
+
+        secret = getSharedPreferences("app", 0).getString("secret", "testsecret");
+        binding.etSecret.setText(secret);
 
         bleBtn = binding.btnBle;
         etScanInterval = binding.etScanInterval;
@@ -231,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
 //        uuidList.add("FDA50693-A4E2-4FB1-AFCF-C6EB07647827");
         String userName = etUserName.getText().toString().trim();
         String projectUUID = binding.etUUID.getText().toString().trim();
-        MalltoMap.init(new MalltoConfig.Builder(domain, projectUUID)
+        MalltoMap.init(new MalltoConfig.Builder(appId, secret, domain, projectUUID)
                 .setDebug(DEBUG)
                 .setMapDomain(MAP_DOMAIN)
                 .setUserSlug(userName) // 可选关联第三方系统的用户唯一标识,如email/mobile/user_id 等
@@ -291,6 +299,8 @@ public class MainActivity extends AppCompatActivity {
         getSharedPreferences("app", 0).edit()
                 .putString("username", username)
                 .putString("uuid", uuid)
+                .putString("appId", appId)
+                .putString("secret", secret)
                 .apply();
     }
 
