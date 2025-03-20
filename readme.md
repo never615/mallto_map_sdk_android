@@ -19,13 +19,9 @@ implementation(files("./libs/mallto-map-release.aar"))
 ### 2.init
 
 ```java
-List<String> uuidList = new ArrayList<>();
-// 支持的beacon uuid
-uuidList.add("FDA50693-A4E2-4FB1-AFCF-C6EB07647827");
 
 MalltoMap.init(new MalltoConfig.Builder(appId, appSecret, SERVER_DOMAIN, PROJECT_UUID)
         .setDebug(DEBUG) //是否打印日志
-        .setDeviceUUIDList(uuidList) // 扫描的iBeacon 设备uuid
         .setUserSlug("001") // 可选关联第三方系统的用户唯一标识,如email/mobile/user_id 等
         .setFetchDeviceSlugCallback(new FetchSlugCallback() { // init会获取设备短标识，异步回调到主线程
             @Override
@@ -79,8 +75,7 @@ MalltoMap.startIBeaconScanning(true, new BeaconSDK.Callback() {
 });
 
 或
-MalltoMap.startIBeaconScanning(uuidList, //支持扫描的iBeacon uuid列表
-                               scanInterval,  //scanInterval 扫描
+MalltoMap.startIBeaconScanning(scanInterval,  //scanInterval 扫描
                                true,  //是否上传扫描结果
                                callback) //扫描结果回调
 

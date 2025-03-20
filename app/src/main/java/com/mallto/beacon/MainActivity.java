@@ -1,6 +1,7 @@
 package com.mallto.beacon;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -11,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,29 +46,30 @@ import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
     public static final boolean DEBUG = true;
+    // 默认配置
+    public static final String APP_ID = "999";
+    public static final String APP_SECRET = "testsecret";
+    public static final String SERVER_DOMAIN = "https://test-easy.mall-to.com";
+//    public static final String MAP_DOMAIN = "https://h5-integration.mall-to.com/integration";
+    public static final String MAP_DOMAIN = "https://h5-test.mall-to.com/test";
+    public static final String PROJECT_UUID = "1000241";
+    public static final long SCAN_INTERVAL = 1100;
 
-    public static final String SERVER_DOMAIN = "https://integration-easy.mall-to.com";
-
-
-    public static final String MAP_DOMAIN = "https://h5-integration.mall-to.com/integration";
     private BluetoothManager bm;
     private Button bleBtn;
     private EditText etScanInterval;
     private EditText etUserName;
     private ActivityMainBinding binding;
 
-
     private String domain = SERVER_DOMAIN;
     private String mapDomain = SERVER_DOMAIN;
-    private String uuid = "1000241";
+    private String projectUUID;
     private String username;
 
     private final Adapter adapter = new Adapter();
     private View domainBtn;
     private Button scanBtn;
     private Button aoaBtn;
-    private String appId;
-    private String secret;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,26 +97,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        binding.btnDeviceUuid.setOnClickListener(new View.OnClickListener() {
+        projectUUID = getSharedPreferences("app", 0).getString("uuid", PROJECT_UUID);
+        binding.etUUID.setText(projectUUID);
 
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, UuidListActivity.class);
-                startActivity(intent);
-            }
-        });
 
-        uuid = getSharedPreferences("app", 0).getString("uuid", "1000241");
-        binding.etUUID.setText(uuid);
-
-        username = getSharedPreferences("app", 0).getString("username", "001");
+        @SuppressLint("HardwareIds") String android_id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+        username = getSharedPreferences("app", 0).getString("username", android_id);
         binding.etUserName.setText(username);
-
-        appId = getSharedPreferences("app", 0).getString("appId", "999");
-        binding.etAppId.setText(appId);
-
-        secret = getSharedPreferences("app", 0).getString("secret", "testsecret");
-        binding.etSecret.setText(secret);
 
         bleBtn = binding.btnBle;
         etScanInterval = binding.etScanInterval;
@@ -224,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        long scanInterval = 1100L;
+        long scanInterval = SCAN_INTERVAL;
         try {
             scanInterval = Long.parseLong(etScanInterval.getText().toString().trim());
         } catch (NumberFormatException ignored) {
@@ -233,13 +223,9 @@ public class MainActivity extends AppCompatActivity {
         // target android 14+, 后台扫描需要传入通知
         Notification notification = createNotification();
 
-        Set<String> uuidSet = getSharedPreferences("app", 0).getStringSet("uuid_list", new HashSet<>());
-        List<String> uuidList = new ArrayList<>(uuidSet);
-        // 支持的beacon uuid
-//        uuidList.add("FDA50693-A4E2-4FB1-AFCF-C6EB07647827");
         String userName = etUserName.getText().toString().trim();
         String projectUUID = binding.etUUID.getText().toString().trim();
-        MalltoMap.init(new MalltoConfig.Builder(appId, secret, domain, projectUUID)
+        MalltoMap.init(new MalltoConfig.Builder(APP_ID, APP_SECRET, domain, projectUUID)
                 .setDebug(DEBUG)
                 .setMapDomain(MAP_DOMAIN)
                 .setUserSlug(userName) // 可选关联第三方系统的用户唯一标识,如email/mobile/user_id 等
@@ -255,7 +241,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .setScanInterval(scanInterval)
-                .setDeviceUUIDList(uuidList)
                 .setNotification(notification)
                 .setIgnoreCertification(true)
                 .build());
@@ -298,9 +283,7 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         getSharedPreferences("app", 0).edit()
                 .putString("username", username)
-                .putString("uuid", uuid)
-                .putString("appId", appId)
-                .putString("secret", secret)
+                .putString("uuid", projectUUID)
                 .apply();
     }
 

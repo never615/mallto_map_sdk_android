@@ -28,12 +28,6 @@
             android:text="初始化"
             android:textSize="18sp" />
 
-        <Button
-            android:id="@+id/btn_device_uuid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="设置beacon uuid列表" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -137,51 +131,6 @@
 
         </LinearLayout>
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/border_item"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:text="appId"
-                android:textColor="@android:color/darker_gray" />
-
-            <EditText
-                android:id="@+id/etAppId"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:hint="请输入appid" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/border_item"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:text="appSecret"
-                android:textColor="@android:color/darker_gray" />
-
-            <EditText
-                android:id="@+id/etSecret"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:hint="请输入appSecret" />
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
